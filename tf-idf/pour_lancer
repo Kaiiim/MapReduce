@@ -1,1 +1,3 @@
+### Mapper 1 - sans reducer - enlever -D mapred.reduce.tasks=0 pour activer les reducers
+
 hadoop jar $HS -D mapred.reduce.tasks=0 -files $PF/Mapper_Tf_Idf.py,$PF/Reducer_Tf_Idf.py,$PF/stopwords_en.txt  -mapper 'python3 Mapper_Tf_Idf.py' -reducer 'python3 Reducer_Tf_Idf.py'  -input ./tf/* -output ./res/r1

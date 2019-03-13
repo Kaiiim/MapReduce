@@ -10,7 +10,6 @@ def read_stopword(file_path):
     return (set(word.strip() for word in open(file_path)))
 
 stopwords = read_stopword("/usr/local/hadoop/MapReduce/tf-idf/stopwords_en.txt")
-#stopwords = read_stopword("hdfs://NameNode:8020/user/root/stopwords_en.txt")
 
 # input depuisSTDIN (standard input)
 for line in sys.stdin:
@@ -29,15 +28,4 @@ for line in sys.stdin:
 # écriture des resultats STDOUT (standard output);
 # Cet output sera l'input de reducer_Tf_Idf.py
         
-# cat file | scriptMapper.py > mapper
 
-
-
-
-#hadoop jar ./share/hadoop/tools/lib/hadoop-streaming-2.7.7.jar -input ./tfidf/files/defoe-robinson-103.txt -output ./res4     -mapper  'python3 Mapper_Tf_Idf.py' -reducer 'python3 Reducer_Tf_Idf.py' -file /usr/local/hadoop/MapReduce/Mapper_Tf_Idf.py -file /usr/local/hadoop/MapReduce/Reducer_Tf_Idf.py
-
-#Importer du fichier des mots a ne pas compter
-#path_file_stopword = "/Users/kaiim/project/MapReduce/tf-idf/files/stopwords_en.txt"
-#path_file_stopword = "./tfidf/files/stopwords_en.txt"
-#fd = open(path_file_stopword, 'r') 
-#stopwords = fd.read().strip().split()
