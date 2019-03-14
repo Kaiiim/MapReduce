@@ -2,56 +2,46 @@
 from operator import itemgetter
 import sys, math
 
-i = 0 
-max = 30
 
-current_word = None
-current_count = 0
+
+i = 0 
+max = 10
+
+title_ref = None
+count_doc = 0
 
 dico = {}
 data = {}
 
 for line in sys.stdin:
-    #if i < max:
-     #   print("tour", i)
-#    filename = os.environ["map_input_file"]
-#    print(filename)
     line = line.strip()
-    word_stdout, count, title = line.split('\t',2)
-    # cast string -> Int
+    
+    word_title, count = line.split('\t',1)
+    word_stdout, title = word_title.split(';',1)
     try:
         count = int(count)
     except ValueError:
         continue
-    data[word_stdout] = count    
-    # Hadoop trie STDOUT automatiquement par key
-    # Lors du tour 1 current_word == None. Attibution de current_count et current_word
-    # Nous pouvons donc au tour 2 comparer automatiquement avec le current word qui réprésente
-    # le résultat précédent
-    if current_word == word_stdout:
-        current_count += 1
-        #if i < max:
-         #   print("current == au mot predecedentcurrent_count", current_count)
+    # dictionnaire pour pouvoir recuperer le nom + titre dans la boucle for
+    data[word_title] = count    
+    # le if else servira a pouvoir compter le nombre de mots par documents
+    if title == title_ref:
+        dico[title] = dico.get(title, 0) + count
     else:
-        dico[current_word] = current_count
-        #if current_word:
-            # écriture le resultat sur STDOUT
-            # Tour Zero attibutions du word et du count qui sera incrémenté
-            #print("x")
-        current_count = count
-        current_word = word_stdout  
-        #if i < max:
-           # print("ELSE", i,  "current_word |", current_word,"| current_count |", current_count, \
-		#"| word_stdout |",word_stdout,"| count |", count,"| titile |", title)
-    #i = i + 1
+        if title:
+            title_ref = title 
 
-dico[current_word] = current_count
-nb_per_doc = len(data)
+# cas de la derniere ligne
+dico[title] = dico.get(title, 0) + count
+
+for key, val in data.items():
+    word, filename = key.split(';', 1)
+    print('%s\t%s\t%s' % (key, val, dico[filename]))
 
 
-for i, (k, v) in enumerate(dico.items()):
-    if v != 0:
-        print("keys", k, "value," ,v / nb_per_doc * math.log10(1/v)) 
+#for i, (k, v) in enumerate(dico.items()):
+#    if v != 0:
+#        print("keys", k, "value," ,v / nb_per_doc * math.log10(1/v)) 
 #   if i < max:
         #print(k, v)
 #        if v != 0:

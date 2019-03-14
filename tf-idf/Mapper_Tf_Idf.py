@@ -22,7 +22,7 @@ for line in sys.stdin:
     for word in words:
        word = word.lower().strip("\t()!.;,:\"'")
        if word not in stopwords and word != '' and len(word) > 3:
-            key = word + '\t' + filename;
+            key = word + ';' + filename;
             print('%s\t%s' % (key, 1))
 
 # écriture des resultats STDOUT (standard output);
