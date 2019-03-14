@@ -35,6 +35,3 @@ for key, val in data.items():
     print('%s\t%s\t%s' % (key, val, dico[filename]))
 
 
-#        if v != 0:
- #           print("keys", k, "value," ,v / nb_per_doc * math.log10(1/v)) 
-

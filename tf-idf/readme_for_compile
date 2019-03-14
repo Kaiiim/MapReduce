@@ -2,7 +2,9 @@
 
 hadoop jar $HS -D mapred.reduce.tasks=0 -files $PF/Mapper_Tf_Idf.py,$PF/Reducer_Tf_Idf.py,$PF/stopwords_en.txt  -mapper 'python3 Mapper_Tf_Idf.py' -reducer 'python3 Reducer_Tf_Idf.py'  -input ./tf/* -output ./res/r1
 
+## calcul nb word perdoc
 hadoop jar $HS -files $PF/Mapper_Tf_Idf.py,$PF/Reducer_Tf_Idf.py,$PF/stopwords_en.txt  -mapper 'python3 Mapper_Tf_Idf.py' -reducer 'python3 Reducer_Tf_Idf.py'  -input ./tf/* -output ./res/resr1
 
-
+# tf idf 
+hadoop jar $HS -files $PF/Mapper2_Tf_Idf.py,$PF/Reducer2_Tf_Idf.py  -mapper 'python3 Mapper2_Tf_Idf.py' -reducer 'python3 Reducer2_Tf_Idf.py'  -input ./res/resr1/* -output ./res/resr1/final
 
