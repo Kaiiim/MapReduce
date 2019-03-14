@@ -3,12 +3,7 @@ from operator import itemgetter
 import sys, math
 
 
-
-i = 0 
-max = 10
-
 title_ref = None
-count_doc = 0
 
 dico = {}
 data = {}
@@ -34,16 +29,12 @@ for line in sys.stdin:
 # cas de la derniere ligne
 dico[title] = dico.get(title, 0) + count
 
+
 for key, val in data.items():
     word, filename = key.split(';', 1)
     print('%s\t%s\t%s' % (key, val, dico[filename]))
 
 
-#for i, (k, v) in enumerate(dico.items()):
-#    if v != 0:
-#        print("keys", k, "value," ,v / nb_per_doc * math.log10(1/v)) 
-#   if i < max:
-        #print(k, v)
 #        if v != 0:
  #           print("keys", k, "value," ,v / nb_per_doc * math.log10(1/v)) 
 
